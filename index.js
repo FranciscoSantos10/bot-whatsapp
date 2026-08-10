@@ -14,10 +14,13 @@ Instruções:
 2. Mantenha respostas curtas e adequadas para mensagens de WhatsApp.
 `;
 
+const { Client, LocalAuth } = require('whatsapp-web.js');
+
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -25,11 +28,11 @@ const client = new Client({
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
+            '--single-process',
             '--disable-gpu'
         ]
     }
 });
-
 client.on('ready', () => {
   console.log('\n✅ Bot do WhatsApp com Google Gemini conectado e pronto!\n');
 });
