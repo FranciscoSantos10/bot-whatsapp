@@ -15,15 +15,19 @@ Instruções:
 `;
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
-  puppeteer: {
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  }
-});
-
-client.on('qr', (qr) => {
-  console.log('\n--- ESCANEIE O QR CODE ABAIXO NO SEU WHATSAPP ---\n');
-  qrcode.generate(qr, { small: true });
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--disable-gpu'
+        ]
+    }
 });
 
 client.on('ready', () => {
