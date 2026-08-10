@@ -20,7 +20,7 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -32,9 +32,6 @@ const client = new Client({
             '--disable-gpu'
         ]
     }
-});
-client.on('ready', () => {
-  console.log('\n✅ Bot do WhatsApp com Google Gemini conectado e pronto!\n');
 });
 
 client.on('message', async (msg) => {
